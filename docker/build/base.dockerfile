@@ -43,12 +43,15 @@ RUN apt-get install -y python-dev \
 
 
 COPY install/protobuf /tmp/install/protobuf
+RUN chmod +x /tmp/install/protobuf/install_protobuf.sh
 RUN /tmp/install/protobuf/install_protobuf.sh
 
 COPY install/abseil /tmp/install/abseil
+RUN chmod +x /tmp/install/abseil/install_abseil.sh
 RUN /tmp/install/abseil/install_abseil.sh
 
 COPY install/grpc /tmp/install/grpc
+RUN chmod +x /tmp/install/grpc/install_grpc.sh
 RUN /tmp/install/grpc/install_grpc.sh
 
 # COPY install/cmake /tmp/install/cmake
