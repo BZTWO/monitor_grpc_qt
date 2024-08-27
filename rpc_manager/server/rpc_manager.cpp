@@ -1,5 +1,6 @@
-#include "rpc_manager.h"
 #include <iostream>
+
+#include "rpc_manager.h"
 
 namespace monitor {
 GrpcManagerImpl::GrpcManagerImpl() {}
@@ -9,6 +10,7 @@ GrpcManagerImpl::~GrpcManagerImpl() {}
     ::grpc::ServerContext* context,
     const ::monitor::proto::MonitorInfo* request,
     ::google::protobuf::Empty* response) {
+  // 确保在处理新的请求数据之前，清除 monitor_infos_ 中的旧数据
   monitor_infos_.Clear();
   monitor_infos_ = *request;
   std::cout << "jinru" << request->soft_irq_size() << std::endl;

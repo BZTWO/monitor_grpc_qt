@@ -1,8 +1,11 @@
 #include <iostream>
+
 #include <grpc/grpc.h>
 #include <grpcpp/server_builder.h>
+
 #include "rpc_manager.h"
 
+// 减少代码在运行期间不必要的消耗
 constexpr char kServerPortInfo[] = "0.0.0.0:50051";
 void InitServer() {
   grpc::ServerBuilder builder;

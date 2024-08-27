@@ -42,6 +42,7 @@ import "cpu_load.proto";
 //   float irq_percent = 8;
 //   float soft_irq_percent = 9;
 // }
+
 // message SoftIrq {
 //   string cpu = 1;
 //   float hi = 2;
@@ -62,8 +63,6 @@ import "cpu_load.proto";
 //   float load_avg_15 = 3;
 // }
 
-
-
 // message NetInfo {
 //   string name = 1;
 //   int64 send_rate = 2;
@@ -72,12 +71,9 @@ import "cpu_load.proto";
 //   int64 rcv_packets_rate = 5;
 // }
 
-
-
-
-
-message MonitorInfo{
+message MonitorInfo {
   string name = 1;
+
   repeated SoftIrq soft_irq = 4;
   CpuLoad cpu_load = 5;
   repeated CpuStat cpu_stat = 6;
@@ -86,9 +82,8 @@ message MonitorInfo{
 }
 
 service GrpcManager {
-  rpc SetMonitorInfo(MonitorInfo) returns (google.protobuf.Empty) {
-  }
-
-  rpc GetMonitorInfo(google.protobuf.Empty) returns (MonitorInfo) {
-  }
+  // 请求
+  rpc SetMonitorInfo(MonitorInfo) returns(google.protobuf.Empty) {}
+  // 响应
+  rpc GetMonitorInfo(google.protobuf.Empty) returns(MonitorInfo) {}
 }
