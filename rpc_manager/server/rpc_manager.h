@@ -1,8 +1,9 @@
 #pragma once
 
+#include <unordered_map>
+
 #include <grpcpp/support/status.h>
 
-#include <unordered_map>
 #include "monitor_info.grpc.pb.h"
 #include "monitor_info.pb.h"
 
@@ -21,7 +22,7 @@ class GrpcManagerImpl : public monitor::proto::GrpcManager::Service {
                                 ::monitor::proto::MonitorInfo* response);
 
  private:
-  monitor::proto::MonitorInfo monitor_infos_;
+  monitor::proto::MonitorInfo monitor_infos_;  // 存放数据结构
 };
 
 }  // namespace monitor

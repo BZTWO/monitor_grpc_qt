@@ -1,7 +1,7 @@
 #include "monitor/cpu_softirq_monitor.h"
-
 #include "utils/read_file.h"
 #include "utils/utils.h"
+
 #include "monitor_info.grpc.pb.h"
 #include "monitor_info.pb.h"
 
@@ -16,6 +16,7 @@ void CpuSoftIrqMonitor::UpdateOnce(monitor::proto::MonitorInfo* monitor_info) {
   }
 
   for (int i = 0; i < softirq[0].size() - 1; i++) {
+    // 数据列
     std::string name = softirq[0][i];
     struct SoftIrq info;
     info.cpu_name = name;
