@@ -1,6 +1,6 @@
 #include "monitor/cpu_stat_monitor.h"
-
 #include "utils/read_file.h"
+
 #include "monitor_info.grpc.pb.h"
 #include "monitor_info.pb.h"
 
@@ -42,29 +42,24 @@ void CpuStatMonitor::UpdateOnce(monitor::proto::MonitorInfo* monitor_info) {
         float old_cpu_busy_time = old.user + old.system + old.nice + old.irq +
                                   old.soft_irq + old.steal;
 
+        float diff_cpu_total_time = new_cpu_total_time - old_cpu_total_time;
+
         float cpu_percent = (new_cpu_busy_time - old_cpu_busy_time) /
-                            (new_cpu_total_time - old_cpu_total_time) * 100.00;
-        float cpu_user_percent = (cpu_stat.user - old.user) /
-                                 (new_cpu_total_time - old_cpu_total_time) *
-                                 100.00;
-        float cpu_system_percent = (cpu_stat.system - old.system) /
-                                   (new_cpu_total_time - old_cpu_total_time) *
-                                   100.00;
-        float cpu_nice_percent = (cpu_stat.nice - old.nice) /
-                                 (new_cpu_total_time - old_cpu_total_time) *
-                                 100.00;
-        float cpu_idle_percent = (cpu_stat.idle - old.idle) /
-                                 (new_cpu_total_time - old_cpu_total_time) *
-                                 100.00;
-        float cpu_io_wait_percent = (cpu_stat.io_wait - old.io_wait) /
-                                    (new_cpu_total_time - old_cpu_total_time) *
-                                    100.00;
-        float cpu_irq_percent = (cpu_stat.irq - old.irq) /
-                                (new_cpu_total_time - old_cpu_total_time) *
-                                100.00;
-        float cpu_soft_irq_percent = (cpu_stat.soft_irq - old.soft_irq) /
-                                     (new_cpu_total_time - old_cpu_total_time) *
-                                     100.00;
+                            diff_cpu_total_time * 100.00;
+        float cpu_user_percent =
+            (cpu_stat.user - old.user) / diff_cpu_total_time * 100.00;
+        float cpu_system_percent =
+            (cpu_stat.system - old.system) / diff_cpu_total_time * 100.00;
+        float cpu_nice_percent =
+            (cpu_stat.nice - old.nice) / diff_cpu_total_time * 100.00;
+        float cpu_idle_percent =
+            (cpu_stat.idle - old.idle) / diff_cpu_total_time * 100.00;
+        float cpu_io_wait_percent =
+            (cpu_stat.io_wait - old.io_wait) / diff_cpu_total_time * 100.00;
+        float cpu_irq_percent =
+            (cpu_stat.irq - old.irq) / diff_cpu_total_time * 100.00;
+        float cpu_soft_irq_percent =
+            (cpu_stat.soft_irq - old.soft_irq) / diff_cpu_total_time * 100.00;
         cpu_stat_msg->set_cpu_name(cpu_stat.cpu_name);
         cpu_stat_msg->set_cpu_percent(cpu_percent);
         cpu_stat_msg->set_usr_percent(cpu_user_percent);
