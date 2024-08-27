@@ -27,7 +27,9 @@ void NetMonitor::UpdateOnce(monitor::proto::MonitorInfo* monitor_info) {
         struct NetInfo old = std::move(iter->second);
         double period =
             Utils::SteadyTimeSecond(net_info.timepoint, old.timepoint);
+
         auto one_net_msg = monitor_info->add_net_info();
+
         one_net_msg->set_name(net_info.name);
         one_net_msg->set_send_rate((net_info.snd_bytes - old.snd_bytes) /
                                    1024.0 / period);
