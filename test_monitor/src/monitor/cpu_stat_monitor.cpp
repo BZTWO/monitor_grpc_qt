@@ -60,6 +60,7 @@ void CpuStatMonitor::UpdateOnce(monitor::proto::MonitorInfo* monitor_info) {
             (cpu_stat.irq - old.irq) / diff_cpu_total_time * 100.00;
         float cpu_soft_irq_percent =
             (cpu_stat.soft_irq - old.soft_irq) / diff_cpu_total_time * 100.00;
+
         cpu_stat_msg->set_cpu_name(cpu_stat.cpu_name);
         cpu_stat_msg->set_cpu_percent(cpu_percent);
         cpu_stat_msg->set_usr_percent(cpu_user_percent);
