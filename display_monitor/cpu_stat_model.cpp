@@ -42,6 +42,7 @@ void CpuStatModel::UpdateMonitorInfo(
   beginResetModel();
   monitor_data_.clear();
 
+  // 空间优化
   for (int i = 0; i < monitor_info.cpu_stat_size(); i++) {
     // std::cout <<monitor_info.cpu_stat(i).cpu_name()<<std::endl;
     monitor_data_.push_back(insert_one_cpu_stat(monitor_info.cpu_stat(i)));

@@ -23,7 +23,7 @@ int main() {
   runners_.emplace_back(new monitor::NetMonitor());
 
   monitor::RpcClient rpc_client_;
-  char *name = getenv("USER");
+  char* name = getenv("USER");
   std::unique_ptr<std::thread> thread_ = nullptr;
   thread_ = std::make_unique<std::thread>([&]() {
     while (true) {

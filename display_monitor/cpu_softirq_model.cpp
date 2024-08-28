@@ -50,6 +50,7 @@ void MonitorBaseModel::UpdateMonitorInfo(
   beginResetModel();
   monitor_data_.clear();
 
+  // 空间优化
   for (int i = 0; i < monito_info.soft_irq_size(); i++) {
     monitor_data_.push_back(insert_one_soft_irq(monito_info.soft_irq(i)));
   }
@@ -61,7 +62,7 @@ void MonitorBaseModel::UpdateMonitorInfo(
   endResetModel();
 
   return;
-} 
+}
 
 std::vector<QVariant> MonitorBaseModel::insert_one_soft_irq(
     const monitor::proto::SoftIrq& soft_irq) {
